@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/START-CODE%20(1)/ui/groceries/grocery_form.dart';
 
 import '../../data/mock_grocery_repository.dart';
 import '../../models/grocery.dart';
@@ -30,7 +31,17 @@ class _GroceryListState extends State<GroceryList> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Groceries'),
-        actions: [IconButton(onPressed: () => {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => NewItem(),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: content,
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/START-CODE%20(1)/ui/groceries/grocery_list.dart';
 
 import '../../models/grocery.dart';
 
@@ -12,6 +13,7 @@ class NewItem extends StatefulWidget {
 }
 
 class _NewItemState extends State<NewItem> {
+  
 
   // Default settings
   static const defautName = "New grocery";
@@ -47,7 +49,15 @@ class _NewItemState extends State<NewItem> {
 
   void onAdd() {
     // Will be implemented later - Create and return the new grocery
+    Grocery newGrocery = new Grocery(
+      id: '1123', 
+      name: _nameController.text, 
+      quantity: int.parse(_quantityController.text), 
+      category: category);
   }
+
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -74,18 +84,23 @@ class _NewItemState extends State<NewItem> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: DropdownButtonFormField<GroceryCategory>(
-                    initialValue: _selectedCategory,
-                    items: [  ],
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() {
-                          _selectedCategory = value;
-                        });
-                      }
-                    },
-                  ),
+                child: DropdownButtonFormField<GroceryCategory>(
+                  initialValue: _selectedCategory, 
+                  items: GroceryCategory.values.map<DropdownMenuItem<GroceryCategory>>((GroceryCategory value) {
+                    return DropdownMenuItem<GroceryCategory>(
+                      value: value,
+                      child: Text(value.name.toUpperCase()),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        _selectedCategory = value;
+                      });
+                    }
+                  },
                 ),
+              ),
               ],
             ),
             const SizedBox(height: 12),
